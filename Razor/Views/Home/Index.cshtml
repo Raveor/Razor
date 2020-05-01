@@ -1,1 +1,24 @@
-﻿Nazwa produktu: @Model.Name
+﻿@model Product
+
+@{
+    ViewBag.Title = "Nazwa producktu";
+}
+<div data-productid="@Model.ProductID" data-stocklevel="@ViewBag.StockLevel">
+    <p>Nazwa produktu: @Model.Name</p>
+    <p>Cena produktu: @($"{Model.Price:C2}")</p>
+    <p>Ilość w magazynie: 
+    @switch ((int)ViewBag.StockLevel)
+    {
+        case 0:
+            @:brak
+            break;
+        case 1:
+        case 2:
+        case 3:
+            <b>mało (@ViewBag.StockLevel)</b>
+            break;
+        default:
+            @: @ViewBag.StockLevel w magazynie
+            break;
+    }</p>
+</div>
